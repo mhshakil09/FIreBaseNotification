@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.firebasenotification.R;
+import com.example.firebasenotification.ui_java.java_profile.JavaProfile2Activity;
 import com.example.firebasenotification.ui_java.java_profile.JavaProfileActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import kotlin.random.Random;
+import timber.log.Timber;
 
 public class JavaMyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String CHANNEL_ID = "my_channel";
@@ -39,7 +41,19 @@ public class JavaMyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d("JavaFCMservice", "Message data payload: " + remoteMessage.getData());
 
-            Intent intent = new Intent(this, JavaProfileActivity.class);
+
+        }
+
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            Intent intent;
+            Timber.d("Firebase "+ remoteMessage.getNotification().getClickAction());
+            if (Objects.equals(remoteMessage.getNotification().getClickAction(), "JavaProfile2Activity")) {
+                intent = new Intent(this, JavaProfile2Activity.class);
+            } else {
+                intent = new Intent(this, JavaProfileActivity.class);
+            }
+
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             Random notificationID = new Random() {
                 @Override
@@ -65,11 +79,6 @@ public class JavaMyFirebaseMessagingService extends FirebaseMessagingService {
                     .build();
 
             notificationManager.notify(id, notification);
-        }
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-
         }
 
     }

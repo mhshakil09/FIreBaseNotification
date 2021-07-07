@@ -14,18 +14,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FIreBaseNotification">
+        <activity android:name=".ui_java.java_profile.JavaProfile2Activity">
+            <intent-filter>
+                <action android:name="JavaProfile2Activity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui_java.java_registration.JavaRegistrationActivity" />
         <activity android:name=".ui_java.java_profile.JavaProfileActivity" />
-        <activity android:name=".ui_java.java_login.JavaLoginActivity" >
+        <activity android:name=".ui_java.java_login.JavaLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="JavaLoginActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
-
-        <!--<activity android:name=".ui.registration.RegistrationActivity" />
+        <!--
+<activity android:name=".ui.registration.RegistrationActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
@@ -33,8 +43,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
-
+        </activity>
+        -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:directBootAware="true"
